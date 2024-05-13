@@ -34,25 +34,30 @@
     // }
 
     //Giải phương trình bậc 2: a*x*x + b*x + c = 0;
-    $a = 1;
-    $b = 6;
-    $c = 8;
-
-    if ($a==0) { //kiểm tra giá trị của a có bằng 0 hay không
-        $x = -$c/$b;
-        echo "Nghiệm x =".$x;
-    } else {
-        $delta = $b*$b - 4*$a*$c; //tính delta = b^2-4ac;
-        if ($delta < 0) {
-            echo "Phương trình vô nghiệm";
-        } else if ($delta == 0) {
-            $x = -$b/(2*$a);
-            echo "Phương trình có nghiệm kép x=".$x; 
+    // $a = 1;
+    // $b = 6;
+    // $c = 8;
+    //khai báo hàm
+    function giaiPTBac2($a,$b,$c) {
+        if ($a==0) { //kiểm tra giá trị của a có bằng 0 hay không
+            $x = -$c/$b;
+            echo "Nghiệm x =".$x;
         } else {
-            $x1 = (-$b+sqrt($delta))/(2*$a);
-            $x2 = (-$b-sqrt($delta))/(2*$a);
-
-            echo "Phương trình có 2 nghiệm phân biệt x1=".$x1."và x2=".$x2;
+            $delta = $b*$b - 4*$a*$c; //tính delta = b^2-4ac;
+            if ($delta < 0) {
+                echo "Phương trình vô nghiệm";
+            } else if ($delta == 0) {
+                $x = -$b/(2*$a);
+                echo "Phương trình có nghiệm kép x=".$x; 
+            } else {
+                $x1 = (-$b+sqrt($delta))/(2*$a);
+                $x2 = (-$b-sqrt($delta))/(2*$a);
+    
+                echo "Phương trình có 2 nghiệm phân biệt x1=".$x1."và x2=".$x2;
+            }
         }
     }
+  
+    // giaiPTBac2(1,6,8);
+    // giaiPTBac2(1,2,1);
 ?>
