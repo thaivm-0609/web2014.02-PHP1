@@ -2,7 +2,8 @@
 require_once './controllers/PostController.php';
 
 //Routing: điều hướng website
-$action = $_GET['act'];
+//VD URL: http://localhost/web2014.02/asm/index.php?act=list
+$action = $_GET['act']; 
 
 switch ($action) {
     case 'list':  
