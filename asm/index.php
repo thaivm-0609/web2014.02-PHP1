@@ -11,9 +11,18 @@ require_once './models/Post.php';
 
 //Routing: điều hướng website
 //VD URL: http://localhost/web2014.02/asm/index.php?act=list
-$action = $_GET['act']; 
-
+$action = isset($_GET['act']) ? $_GET['act'] : '/'; 
+/* toán tử 3 ngôi, tương tự 
+if (isset($_GET['act'])) {
+    $action = $_GET['act'];
+} else {
+    $action = '/';
+}
+*/
 switch ($action) {
+    case '/': 
+        echo 'Đây là trang chủ';
+        break;
     case 'list':
         /* B1: khởi tạo 1 object từ class PostController
             B2: từ object vừa tạo, thực hiện gọi hàm */
@@ -21,8 +30,14 @@ switch ($action) {
         // $postController->hienThiDanhSach();
         (new PostController())->hienThiDanhSach();
         break;
+    case 'detail':
+        (new PostController())->thongTinChiTiet();
+        break;
     case 'create':
         echo 'Đây là trang tạo mới';
+        break;
+    case 'delete':
+        (new PostController())->xoa();
         break;
 }
 ?>

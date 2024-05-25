@@ -17,9 +17,17 @@ class PostController
         require_once './views/listPost.php';
     }
 
-    public function hienThiChiTiet()
+    public function thongTinChiTiet()
     {
+        //kiểm tra xem có truyền giá trị id_post lên URL không và id_post > 0
+        if(isset($_GET['id_post']) && $_GET['id_post'] > 0) { 
 
+            $id = $_GET['id_post'];
+
+            $post = $this->postModel->chiTietPost($id); 
+            
+            require_once './views/detailPost.php';
+        }
     }
 
     public function themMoi()

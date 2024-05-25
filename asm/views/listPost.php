@@ -14,6 +14,7 @@
                 <th>Content</th>
                 <th>Author</th>
                 <th>Thumbnail</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,11 @@
                     <td><?= $p['content'] ?></td>
                     <td><?= $p['user_id'] ?></td>
                     <td><img src="<?=$p['thumbnail']?>" alt=""></td>
+                    <td>
+                        <a href="index.php?act=detail&id_post=<?=$p['id']?>">Detail</a>
+                        <a href="">Edit</a>
+                        <a href="index.php?act=delete?id_post=<?=$p['id']?>">Delete</a>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>
