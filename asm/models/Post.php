@@ -11,7 +11,13 @@ class Post
     //lấy toàn bộ bản ghi trong bảng post
     public function danhSachPost() {
         //B1: Viết câu truy vấn 
-        $sql = "SELECT * FROM posts";
+        //cú pháp join dữ liệu JOIN tenBangCanJoin ON tenBangGoc.ForeignKey = tenBangCanJoin.id 
+        $sql = "SELECT *,users.name as author
+                FROM posts 
+                JOIN users ON posts.user_id = users.id
+                JOIN categories ON posts.category_id = categories.id";
+        // var_dump($sql);
+        // die;
         //B2: Thực thi câu truy vấn: 
         $stmt = $this->connection->prepare($sql); //B2.1: prepare
         $stmt->execute(); //B2.2: execute: thực thi câu truy vấn
@@ -29,6 +35,15 @@ class Post
 
         //lấy 1 bài post trả về nên sử dụng hàm fetch()
         return $stmt->fetch();
+    }
+
+    public function themPost($title,$content,$userId,$cateId,$thumbnail)
+    {
+        $sql = "INSERT INTO posts (title,content,user_id,category_id,thumbnail) 
+                VALUES ('$title','$content','$userId','$cateId','$thumbnail')";
+
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute();
     }
 }
 ?>

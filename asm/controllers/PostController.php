@@ -30,9 +30,20 @@ class PostController
         }
     }
 
-    public function themMoi()
+    public function taoMoi()
     {
+        if (isset($_POST['them'])) {
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $userId = $_POST['user_id'];
+            $cateId = $_POST['category_id'];
+            $thumbnail = $_POST['thumbnail'];
 
+            $this->postModel->themPost($title,$content,$userId,$cateId,$thumbnail);
+            header('location: index.php?act=list');
+        } else {
+            require_once './views/createPost.php';
+        }
     }
 }
 ?>

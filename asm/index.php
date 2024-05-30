@@ -34,7 +34,7 @@ switch ($action) {
         (new PostController())->thongTinChiTiet();
         break;
     case 'create':
-        echo 'Đây là trang tạo mới';
+        (new PostController())->taoMoi();
         break;
     case 'delete':
         (new PostController())->xoa();

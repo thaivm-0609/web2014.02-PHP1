@@ -6,6 +6,7 @@
     <title>Danh sách bài post</title>
 </head>
 <body>
+    <a href="index.php?act=create">Create</a>
     <table>
         <thead>
             <tr>
@@ -13,6 +14,7 @@
                 <th>Title</th>
                 <th>Content</th>
                 <th>Author</th>
+                <th>Category</th>
                 <th>Thumbnail</th>
                 <th>Action</th>
             </tr>
@@ -23,7 +25,8 @@
                     <td><?= $p['id'] ?></td>
                     <td><?= $p['title'] ?></td>
                     <td><?= $p['content'] ?></td>
-                    <td><?= $p['user_id'] ?></td>
+                    <td><?= $p['author'] ?></td>
+                    <td><?= $p['name'] ?></td>
                     <td><img src="<?=$p['thumbnail']?>" alt=""></td>
                     <td>
                         <a href="index.php?act=detail&id_post=<?=$p['id']?>">Detail</a>
