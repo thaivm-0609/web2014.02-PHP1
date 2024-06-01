@@ -2,10 +2,15 @@
 class PostController 
 {
     public $postModel;
+    public $userModel; //truy vấn dữ liệu từ bảng user
+    public $cateModel; 
 
     public function __construct() 
     {
+        //phải require model ở trong index.php
         $this->postModel = new Post();
+        $this->userModel = new User();
+        $this->cateModel = new Category();
     }
 
     public function hienThiDanhSach()
@@ -32,7 +37,7 @@ class PostController
 
     public function taoMoi()
     {
-        if (isset($_POST['them'])) {
+        if (isset($_POST['them'])) { //kiểm tra xem người dùng đã bấm nút submit hay chưa?
             $title = $_POST['title'];
             $content = $_POST['content'];
             $userId = $_POST['user_id'];
@@ -41,7 +46,10 @@ class PostController
 
             $this->postModel->themPost($title,$content,$userId,$cateId,$thumbnail);
             header('location: index.php?act=list');
-        } else {
+        } else { //nếu ng dùng chưa submit, trả về view createPost
+            $users = $this->userModel->listUsers();
+            $categories = $this->cateModel->listCate();
+            
             require_once './views/createPost.php';
         }
     }

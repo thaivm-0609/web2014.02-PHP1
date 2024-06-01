@@ -17,11 +17,24 @@
         </div>
         <div>
             <label for="">Author</label>
-            <input type="text" name="user_id">
+            <select name="user_id" id="">
+                <!-- lấy danh sách user từ bảng users
+                để hiển thị ra option -->
+                <?php foreach ($users as $u) { ?>
+                    <!-- <option value="(giá trị lấy để lưu vào db)">Label (người dùng nhìn thấy)</option> -->
+                    <option value="<?= $u['id'] ?>"><?= $u['name'] ?></option>
+                <?php } ?>
+            </select>
         </div>
         <div>
             <label for="">Category</label>
-            <input type="text" name="category_id">
+            <select name="category_id" id="">
+                <!-- lấy danh sách danh mục từ bảng categories
+                để hiển thị ra option -->
+                <?php foreach($categories as $c) { ?>
+                    <option value="<?= $c['id'] ?>"><?=$c['name'] ?></option>
+                <?php } ?>
+            </select>
         </div>
         <div>
             <label for="">Thumbnail</label>

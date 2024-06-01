@@ -8,6 +8,8 @@ require_once './controllers/PostController.php';
 
 //require models
 require_once './models/Post.php';
+require_once './models/User.php';
+require_once './models/Category.php';
 
 //Routing: điều hướng website
 //VD URL: http://localhost/web2014.02/asm/index.php?act=list
