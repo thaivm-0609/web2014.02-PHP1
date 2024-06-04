@@ -12,7 +12,7 @@ class Post
     public function danhSachPost() {
         //B1: Viết câu truy vấn 
         //cú pháp join dữ liệu JOIN tenBangCanJoin ON tenBangGoc.ForeignKey = tenBangCanJoin.id 
-        $sql = "SELECT *,users.name as author
+        $sql = "SELECT *,users.name as author,posts.id as pid
                 FROM posts 
                 JOIN users ON posts.user_id = users.id
                 JOIN categories ON posts.category_id = categories.id";
@@ -43,6 +43,16 @@ class Post
                 VALUES ('$title','$content','$userId','$cateId','$thumbnail')";
 
         $stmt = $this->connection->prepare($sql);
+        return $stmt->execute();
+    }
+
+    public function suaPost($id,$title,$content,$userId,$cateId,$thumbnail)
+    {
+        $sql = "UPDATE posts 
+            SET title='$title',content='$content',user_id='$userId',category_id='$cateId',thumbnail='$thumbnail'
+            WHERE id=$id";
+        $stmt = $this->connection->prepare($sql);
+
         return $stmt->execute();
     }
 }

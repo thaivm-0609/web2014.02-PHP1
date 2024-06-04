@@ -38,6 +38,9 @@ switch ($action) {
     case 'create':
         (new PostController())->taoMoi();
         break;
+    case 'edit':
+        (new PostController())->chinhSua();
+        break;
     case 'delete':
         (new PostController())->xoa();
         break;

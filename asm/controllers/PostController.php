@@ -53,5 +53,31 @@ class PostController
             require_once './views/createPost.php';
         }
     }
+
+    public function chinhSua() {
+        //kiểm tra xem có truyền giá trị id_post lên URL không và id_post > 0
+        if(isset($_GET['id_post']) && $_GET['id_post'] > 0) { 
+            //hiển thị dữ liệu cũ ra form edit
+            $id = $_GET['id_post'];
+            if (isset($_POST['sua'])) {
+                //lấy dữ liệu từ form: $_POST['name'], thuộc tính name khai báo trong thẻ html trong form
+                $title = $_POST['title'];
+                $content = $_POST['content'];
+                $userId = $_POST['user_id'];
+                $cateId = $_POST['category_id'];
+                $thumbnail = $_POST['thumbnail'];
+
+                //gửi dữ liệu sang model để thực hiện câu truy vấn
+                $this->postModel->suaPost($id,$title,$content,$userId,$cateId,$thumbnail);
+                header('location: index.php?act=list');
+            } else {
+                $post = $this->postModel->chiTietPost($id); 
+                $users = $this->userModel->listUsers();
+                $categories = $this->cateModel->listCate();
+                
+                require_once './views/editPost.php';
+            }
+        }
+    }
 }
 ?>
