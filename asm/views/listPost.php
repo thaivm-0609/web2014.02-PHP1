@@ -27,11 +27,14 @@
                     <td><?= $p['content'] ?></td>
                     <td><?= $p['author'] ?></td>
                     <td><?= $p['name'] ?></td>
-                    <td><img src="<?=$p['thumbnail']?>" alt=""></td>
+                    <td><img style="height: 200px" src="./uploads/<?=$p['thumbnail']?>" alt=""></td>
                     <td>
                         <a href="index.php?act=detail&id_post=<?=$p['pid'] ?>">Detail</a>
                         <a href="index.php?act=edit&id_post=<?= $p['pid'] ?>">Edit</a>
-                        <a href="index.php?act=delete?id_post=<?=$p['pid']?>">Delete</a>
+                        <a 
+                            href="index.php?act=delete&id_post=<?= $p['pid'] ?>"
+                            onclick="return confirm('Bạn có chắc không?')"  
+                        >Delete</a>
                     </td>
                 </tr>
             <?php } ?>

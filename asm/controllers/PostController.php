@@ -42,7 +42,15 @@ class PostController
             $content = $_POST['content'];
             $userId = $_POST['user_id'];
             $cateId = $_POST['category_id'];
-            $thumbnail = $_POST['thumbnail'];
+            $thumbnail = $_FILES['image']['name'];
+            
+            //code logic upload file
+            $from = $_FILES['image']['tmp_name']; //lấy file từ bộ nhớ tạm thời 
+            $target_folder = PATH_ROOT.'uploads/'; //thư mục lưu file upload
+            //$to: tên thư mục lưu + tên file
+            $to = $target_folder . basename($_FILES['image']['name']);
+            //dùng hàm move_uploaded_file để tải ảnh lên server
+            move_uploaded_file($from,$to);
 
             $this->postModel->themPost($title,$content,$userId,$cateId,$thumbnail);
             header('location: index.php?act=list');
@@ -77,6 +85,14 @@ class PostController
                 
                 require_once './views/editPost.php';
             }
+        }
+    }
+
+    public function xoa() {
+        if (isset($_GET['id_post']) && $_GET['id_post'] > 0) { //kiểm tra id_post có hợp lệ hay không
+            $id = $_GET['id_post']; //lấy id bài post cần xóa
+            $this->postModel->xoaPost($id); //gọi hàm trong model để thực hiện truy vấn
+            header('location: index.php?act=list');
         }
     }
 }

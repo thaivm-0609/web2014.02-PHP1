@@ -55,5 +55,12 @@ class Post
 
         return $stmt->execute();
     }
+
+    public function xoaPost($id) {
+        $sql = "DELETE FROM posts WHERE id=$id";
+        $stmt = $this->connection->prepare($sql);
+
+        return $stmt->execute();
+    }
 }
 ?>

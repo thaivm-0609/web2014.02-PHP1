@@ -6,7 +6,11 @@
     <title>Thêm mới post</title>
 </head>
 <body>
-    <form action="index.php?act=create" method="POST">
+    <form 
+        action="index.php?act=create" 
+        method="POST"
+        enctype="multipart/form-data"
+    >
         <div>
             <label for="">Title</label>
             <input type="text" name="title">
@@ -38,7 +42,7 @@
         </div>
         <div>
             <label for="">Thumbnail</label>
-            <input type="text" name="thumbnail">
+            <input type="file" name="image">
         </div>
         <input type="submit" value="Thêm" name="them">
     </form>
