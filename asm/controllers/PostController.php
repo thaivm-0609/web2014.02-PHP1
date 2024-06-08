@@ -67,19 +67,36 @@ class PostController
         if(isset($_GET['id_post']) && $_GET['id_post'] > 0) { 
             //hiển thị dữ liệu cũ ra form edit
             $id = $_GET['id_post'];
+            $post = $this->postModel->chiTietPost($id); 
             if (isset($_POST['sua'])) {
                 //lấy dữ liệu từ form: $_POST['name'], thuộc tính name khai báo trong thẻ html trong form
                 $title = $_POST['title'];
                 $content = $_POST['content'];
                 $userId = $_POST['user_id'];
                 $cateId = $_POST['category_id'];
-                $thumbnail = $_POST['thumbnail'];
+                
+                // Nếu upload ảnh mới->dùng ảnh mới, ngược lại thì dùng ảnh cũ
+                
+                if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] !== '') 
+                //nếu tồn tại thằng $_FILES['thumbnail'] và $_FILES['thumbnail']['name'] khác string rỗng
+                {
+                    $thumbnail = $_FILES['thumbnail']['name'];
+                    //code logic upload file
+                    $from = $_FILES['thumbnail']['tmp_name']; //lấy file từ bộ nhớ tạm thời 
+                    $target_folder = PATH_ROOT.'uploads/'; //thư mục lưu file upload
+                    //$to: tên thư mục lưu + tên file
+                    $to = $target_folder . basename($_FILES['thumbnail']['name']);
+                    //dùng hàm move_uploaded_file để tải ảnh lên server
+                    move_uploaded_file($from,$to);
+                } else { 
+                    //nếu không upload ảnh mới thì dùng giá trị ảnh cũ
+                    $thumbnail = $post['thumbnail'];
+                }
 
                 //gửi dữ liệu sang model để thực hiện câu truy vấn
                 $this->postModel->suaPost($id,$title,$content,$userId,$cateId,$thumbnail);
                 header('location: index.php?act=list');
             } else {
-                $post = $this->postModel->chiTietPost($id); 
                 $users = $this->userModel->listUsers();
                 $categories = $this->cateModel->listCate();
                 

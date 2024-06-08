@@ -6,7 +6,14 @@
     <title>Sửa post</title>
 </head>
 <body>
-    <form action="index.php?act=edit&id_post=<?=$post['id']?>" method="POST">
+    <!-- Để upload file: 
+    * B1: Thêm enctype="multipart/form-data" vào thẻ form
+    * B2: Đổi type="file" trong thẻ input -->
+    <form 
+        action="index.php?act=edit&id_post=<?=$post['id']?>" 
+        method="POST"
+        enctype="multipart/form-data"
+    >
         <div>
             <label for="">Title</label>
             <input type="text" name="title" value="<?=$post['title']?>">
@@ -47,7 +54,8 @@
         </div>
         <div>
             <label for="">Thumbnail</label>
-            <input type="text" name="thumbnail" value="<?=$post['thumbnail']?>">
+            <input type="file" name="thumbnail" value="<?=$post['thumbnail']?>">
+            <img style="height: 100px;" src="./uploads/<?=$post['thumbnail']?>" alt="">
         </div>
         <input type="submit" value="Sửa" name="sua">
     </form>
